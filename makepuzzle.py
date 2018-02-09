@@ -3,23 +3,23 @@ import random
 import json
 
 def makePuzzle(args):
-    puzzle = {'width': args.width, 'height': args.height, 'puzzles': []}
+	puzzle = {'width': args.width, 'height': args.height, 'puzzles': []}
 
-    #grid = [[0 for y in range(args.height)] for x in range(args.width)]
+	#grid = [[0 for y in range(args.height)] for x in range(args.width)]
 
-    for i in range(args.numPuzzles):
-        minesGenerated = 0
-        puzzle['puzzles'].append([])
-        while minesGenerated < args.mines:
-            x = random.randint(0, args.width-1)
-            y = random.randint(0, args.height-1)
-            if [x, y] not in puzzle['puzzles'][i]:
-                puzzle['puzzles'][i].append([x, y])
-                minesGenerated+=1
+	for i in range(args.numPuzzles):
+		minesGenerated = 0
+		puzzle['puzzles'].append([])
+		while minesGenerated < args.mines:
+			x = random.randint(0, args.width-1)
+			y = random.randint(0, args.height-1)
+			if [x, y] not in puzzle['puzzles'][i]:
+				puzzle['puzzles'][i].append([x, y])
+				minesGenerated+=1
 
-    f = open(args.filename, 'w')
-    f.write(json.dumps(puzzle))
-    f.close()
+	f = open(args.filename, 'w')
+	f.write(json.dumps(puzzle))
+	f.close()
 
 parser = argparse.ArgumentParser(description='Generate games of minesweeper.')
 
@@ -34,6 +34,6 @@ args = parser.parse_args()
 random.seed(a=args.seed)
 
 if args.mines > args.width * args.height:
-    raise 'You have created more mines than you have room for'
+	raise 'You have created more mines than you have room for'
 
 makePuzzle(args)
